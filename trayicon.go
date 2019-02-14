@@ -102,9 +102,9 @@ func getConfigs() []ConfigIni {
 func setupSysTrayReal() {
 
 	systray.SetIcon(icon.GetIcon())
-	mUrl := systray.AddMenuItem("Go to Arduino Create", "Arduino Create")
-	mDebug := systray.AddMenuItem("Open debug console", "Debug console")
-	menuVer := systray.AddMenuItem("Agent version "+version+"-"+git_revision, "")
+	mUrl := systray.AddMenuItem("Open Robotwala", "Arduino Create")
+	// mDebug := systray.AddMenuItem("Open debug console", "Debug console")
+	// menuVer := systray.AddMenuItem("Agent version "+version+"-"+git_revision, "")
 	mPause := systray.AddMenuItem("Pause Plugin", "")
 	var mConfigCheckbox []*systray.MenuItem
 
@@ -124,7 +124,7 @@ func setupSysTrayReal() {
 	}
 	//mQuit := systray.AddMenuItem("Quit Plugin", "")
 
-	menuVer.Disable()
+	// menuVer.Disable()
 
 	for i, _ := range mConfigCheckbox {
 		go func(v int) {
@@ -154,19 +154,19 @@ func setupSysTrayReal() {
 	// 	exit()
 	// }()
 
-	go func() {
-		for {
-			<-mDebug.ClickedCh
-			logAction("log on")
-			open.Start("http://127.0.0.1" + port)
-		}
-	}()
+	// go func() {
+	// 	for {
+	// 		<-mDebug.ClickedCh
+	// 		logAction("log on")
+	// 		open.Start("http://127.0.0.1" + port)
+	// 	}
+	// }()
 
 	// We can manipulate the systray in other goroutines
 	go func() {
 		for {
 			<-mUrl.ClickedCh
-			open.Start("http://create.arduino.cc")
+			open.Start("http://app.robotwala.org")
 		}
 	}()
 }
